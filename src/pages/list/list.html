@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-searchbar [(ngModel)]="searchTerm" [showCancelButton]="true" (ionCancel)="onCancel($event)" [formControl]="searchControl">
+  </ion-searchbar>
+  <ion-list>
+    <ion-row text-center>
+      <ion-col *ngFor="let pokemon of pokemons; let i = index">
+        <ion-card class="pokemon_card">
+          <img src="{{getImg(i+1)}}">
+          <ion-card-content>
+            <p>{{pokemon.name}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
